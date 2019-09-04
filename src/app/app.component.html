@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="card">
+    <div>
+      <h1>{{title}}</h1>
+    </div>
+    <p class= "text-info">This Angular App is created by {{developerName}}</p>
+    <div class= "row">
+      <div class= "col-md-2">Filter By : </div>
+      <div class= "col-md-6"><input [(ngModel)]='searchText' type='text' class='form-control'/>
+      </div>
+    </div>
+    <br/>
+    <div class ="row">
+      <div class="table table-responsive">
+        <table class= "table table-striped" *ngIf='products && products.length'>
+          <thead>
+            <th>
+              <button class = "btn btn-info" (click)='toggleImage()'>
+                {{showImage? 'Hide' : 'Show'}} Image
+              </button>
+            </th>
+            
+            <th>
+              Name
+            </th>
+            
+            <th>
+              Code
+            </th>
+
+            <th>
+              Price
+            </th>
+
+            <th>
+              Rating
+            </th>
+
+            <th>
+              Release Date
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of products | productfilter: searchText">
+              <td>
+                <img alt="FOO" [src]='p.imageUrl' [style.margin.px]='imageMargin' [style.width.px]='imageWidth' *ngIf='showImage'/>
+              </td>
+              <td>
+                {{p.productName | uppercase}}
+              </td>
+              <td>
+                {{p.productCode}}
+              </td>
+              <td>
+                {{p.price | currency: 'USD': 'symbol': '1.2-2'}}
+              </td>
+              <td>
+                {{p.starRating}}
+              </td>
+              <td>
+                {{p.releaseDate}}
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
